@@ -73,7 +73,7 @@ router.post('/', function(req, res) {
             else {
                 // inserting data into USERS
                 const userQueryToInsert = `INSERT INTO USERS (first_name, last_name, email, age, password) VALUES 
-                ('${first_name}', '${last_name}', '${email}', '${age}', '${password}');`;
+                ('${first_name}', '${last_name}', '${email}', ${age}, '${password}');`;
                 client.query(userQueryToInsert, (err, result) => {
                     if(err) { 
                         // checking if email already exists
@@ -82,6 +82,7 @@ router.post('/', function(req, res) {
                             res.status(400).send('Email Already Exists');
                         }
                         else {
+                            console.log(err)
                             res.status(400).send(err);    
                         }
                     }
